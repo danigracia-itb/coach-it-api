@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->boolean("entrenador")->default(false);
+            $table->boolean("is_coach")->default(false);
 
-            $table->bigInteger("entrenador_id")->unsigned()->nullable();
-            $table->foreign("entrenador_id")->references("id")->on("users")->onDelete("set null");
+            $table->bigInteger("coach_id")->unsigned()->nullable();
+            $table->foreign("coach_id")->references("id")->on("users")->onDelete("set null");
 
             $table->rememberToken();
             $table->timestamps();
