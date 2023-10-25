@@ -11,18 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Primera migración
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedInteger('id')->primary()->unique()->length(6);
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean("is_coach")->default(false);
 
-            $table->bigInteger("coach_id")->unsigned()->nullable();
-            $table->foreign("coach_id")->references("id")->on("users")->onDelete("set null");
-
+            $table->unsignedInteger("coach_id")->length(6)->nullable();
             $table->rememberToken();
             $table->timestamps();
+        });
+
+        // Segunda migración
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign("coach_id")->references("id")->on("users")->onDelete('set null')->onUpdate('cascade');
         });
     }
 
