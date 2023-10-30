@@ -63,6 +63,7 @@ class AuthController extends Controller
         }
 
         $user = User::create([
+            "id" => random_int(000001, 999999),
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
