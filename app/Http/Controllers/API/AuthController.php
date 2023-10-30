@@ -2,21 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login', 'register', 'getUser']]);
-    }
-
     public function login(Request $request)
     {
         $data = $request->all();
@@ -29,9 +22,7 @@ class AuthController extends Controller
             return response()->json(["error" => $validator->messages()], 400);
         }
 
-        $credentials = $request->only('email', 'password');
-
-        if (!$token = Auth::attempt($credentials)) {
+        if (!Auth::attempt($data)) {
             return response()->json([
                 'status' => 'error',
                 'msg' => 'Unauthorized',
@@ -39,6 +30,8 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
+        $token = $user->createToken('authToken')->plainTextToken;
+
         return response()->json([
             'status' => 'success',
             'user' => $user,
@@ -53,70 +46,39 @@ class AuthController extends Controller
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
+            'name' => 'required|string',
+            'email' => 'required|string|email|unique:users',
+            'password' => 'required|string',
+            'is_coach' => 'boolean',
+            'coach_id' => 'nullable|exists:users,id',
         ]);
 
         if ($validator->fails()) {
             return response()->json(["error" => $validator->messages()], 400);
         }
 
-        $user = User::create([
-            "id" => random_int(000001, 999999),
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'is_coach' => $request->input('is_coach', false), // Assuming is_coach is provided in the request
-            'coach_id' => $request->input('coach_id', null), // Assuming coach_id is provided in the request
-        ]);
+        $data['password'] = bcrypt($data['password']);
 
-        $token = Auth::login($user);
+        $user = User::create($data);
+
         return response()->json([
             'status' => 'success',
-            'msg' => 'User created successfully',
             'user' => $user,
-            'authorization' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        Auth::logout();
-        return response()->json([
-            'status' => 'success',
-            'msg' => 'Successfully logged out',
-        ]);
-    }
+        $request->user()->currentAccessToken()->delete();
 
-    public function refresh()
-    {
         return response()->json([
             'status' => 'success',
-            'user' => Auth::user(),
-            'authorization' => [
-                'token' => Auth::refresh(),
-                'type' => 'bearer',
-            ]
+            'msg' => 'Logged out successfully',
         ]);
     }
 
     public function getUser(Request $request)
     {
-        $token = $request->token;
-        $user = Auth::setToken($token)->user();
-        if (!$user) {
-            return response()->json([
-                'status' => 'error',
-                'msg' => 'Invalid token',
-            ], 401);
-        }
-        return response()->json([
-            'status' => 'success',
-            'user' => $user,
-        ]);
+        return true;
     }
 }
