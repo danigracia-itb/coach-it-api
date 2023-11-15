@@ -21,10 +21,9 @@ use App\Http\Controllers\API\AuthController;
 //     return $request->user();
 // });
 
-Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('register', 'register');
-    Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
-    Route::post('get-user', 'getUser');
-});
+// user
+Route::post('/login',  [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/logout', [AuthController::class, 'logout'])->middleware("jwtAuth");
+Route::post('/refresh', [AuthController::class, 'refresh'])->middleware("jwtAuth");
+Route::get('/get-user', [AuthController::class, 'getUser'])->middleware("jwtAuth");
