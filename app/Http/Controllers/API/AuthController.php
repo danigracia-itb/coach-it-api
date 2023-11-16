@@ -25,27 +25,27 @@ class AuthController extends Controller
                 'name' => 'required',
                 'email' => 'required|email',
                 'password' => 'required',
-                'is_coach' => 'boolean',
-                'coach_id' => 'exists:users,id'
+                'is_coach' => 'required | boolean',
             ]
         );
 
         if ($validator->fails()) {
-
             return response()->json(['error' => $validator->errors()], 401);
         }
 
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
+        $user = new User([
+            "id" => random_int(100000, 999999),
+            "name" => $request->name,
+            "email" => $request->email,
+            "password" => bcrypt($request->password)
+        ]);
 
         if($request->is_coach == true) {
             $user->is_coach = true;
         }
 
-        if($request->coach_id){
+        if($request->coach_id && $request->is_coach == false){
             $user->coach_id = $request->coach_id;
         }
 
