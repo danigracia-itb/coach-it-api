@@ -35,5 +35,6 @@ Route::post('users/password-recover', [PasswordRecoverController::class, 'passwo
 
 
 //coach
-Route::get('coach/get-clients/{id}', [CoachController::class, 'getClients']);
+Route::get('coach/get-athletes/{id}', [CoachController::class, 'getAthletes']);
+Route::get('coach/get-athlete-profile/{id}', [CoachController::class, 'getAthleteProfile']);
 

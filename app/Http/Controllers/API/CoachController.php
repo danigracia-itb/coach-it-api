@@ -8,9 +8,15 @@ use App\Http\Controllers\Controller;
 
 class CoachController extends Controller
 {
-    public function getClients($id)
+    public function getAthletes($id)
     {
-        $clients = User::where("coach_id", $id)->get();
-        return $clients;
+        $athletes = User::where("coach_id", $id)->get();
+        return $athletes;
+    }
+    public function getAthleteProfile($id) {
+        //TODO: Add form info
+
+        $athlete = User::where("id", $id)->first();
+        return $athlete;
     }
 }
