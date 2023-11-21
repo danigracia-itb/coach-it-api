@@ -20,6 +20,9 @@ return new class extends Migration
             $table->boolean("is_coach")->default(false);
 
             $table->unsignedInteger("coach_id")->length(6)->nullable();
+
+            $table->string("password_reset_token", 20)->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });
