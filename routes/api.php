@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 //Contollers
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CoachController;
+use App\Http\Controllers\API\ExerciseController;
 use App\Http\Controllers\API\PasswordRecoverController;
 
 /*
@@ -37,4 +38,7 @@ Route::post('users/password-recover', [PasswordRecoverController::class, 'passwo
 //coach
 Route::get('coach/get-athletes/{id}', [CoachController::class, 'getAthletes']);
 Route::get('coach/get-athlete-profile/{id}', [CoachController::class, 'getAthleteProfile']);
+
+//Exercises
+Route::get('exercises/get-all-user/{id}', [ExerciseController::class, 'getAllUserExercises']);
 

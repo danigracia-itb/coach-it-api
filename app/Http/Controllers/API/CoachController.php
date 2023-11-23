@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\User;
+use App\Models\Exercise;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -19,4 +20,6 @@ class CoachController extends Controller
         $athlete = User::where("id", $id)->first();
         return $athlete;
     }
+
+
 }

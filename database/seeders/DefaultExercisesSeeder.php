@@ -130,7 +130,7 @@ class DefaultExercisesSeeder extends Seeder
 
 
         foreach ($exerciseArray as $exercise) {
-            DB::table('default_exercises')->insert([
+            DB::table('exercises')->insert([
                 'name' => $exercise["name"],
                 'muscular_group' => $exercise["muscular_group"],
             ]);

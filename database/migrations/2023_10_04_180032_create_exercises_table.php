@@ -11,12 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('default_exercises', function (Blueprint $table) {
+        Schema::create('exercises', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string('name');
 
             //1: Push | 2: Pull | 3: Leg | 4: Core
             $table->integer("muscular_group");
+
+
+            $table->boolean('is_default')->default(true); // Identificar si es un ejercicio por defecto
+            $table->foreignId('user_id')->nullable()->constrained(); // Relación con la tabla de usuarios (puede ser nulo para ejercicios por defecto)
+
+            $table->timestamps();
         });
     }
 
@@ -25,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('default_exercises');
+        Schema::dropIfExists('exercises');
     }
 };
