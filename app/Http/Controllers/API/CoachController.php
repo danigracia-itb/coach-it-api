@@ -15,11 +15,7 @@ class CoachController extends Controller
         return $athletes;
     }
     public function getAthleteProfile($id) {
-        //TODO: Add form info
-
-        $athlete = User::where("id", $id)->first();
+        $athlete = User::where("id", $id)->with("userData.availableDays")->first();
         return $athlete;
     }
-
-
 }

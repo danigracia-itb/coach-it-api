@@ -11,7 +11,7 @@ class UserData extends Model
 
     protected $table = 'user_data';
     protected $fillable = [
-        'users',
+        'user_id',
         'date_birth',
         'height',
         'body_weight',
@@ -27,7 +27,7 @@ class UserData extends Model
     // Relación con la tabla 'users'
     public function user()
     {
-        return $this->belongsTo(User::class, 'users');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     // Relación con la tabla 'available_days'

@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
 
         // Crear datos de usuario de ejemplo
         $userData = UserData::create([
-            'users' => 111112,
+            'user_id' => 111112,
             'date_birth' => '1990-01-01',
             'height' => 180,
             'body_weight' => 70.5,
