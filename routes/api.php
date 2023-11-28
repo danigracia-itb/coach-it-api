@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AthleteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,9 @@ Route::post('users/password-recover', [PasswordRecoverController::class, 'passwo
 Route::get('coach/get-athletes/{id}', [CoachController::class, 'getAthletes']);
 Route::get('coach/get-athlete-profile/{id}', [CoachController::class, 'getAthleteProfile']);
 
+//athlete
+Route::post('athlete/user-data', [AthleteController::class, 'storeUserData']);
+
 //Exercises
 Route::get('exercises/get-all-user/{id}', [ExerciseController::class, 'getAllUserExercises']);
-
+Route::post('exercises', [ExerciseController::class, 'store']);

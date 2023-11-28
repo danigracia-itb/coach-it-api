@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class AthleteController extends Controller
 {
     //Guardar la user data
-    public function storeUserData(Request $request, string $id)
+    public function storeUserData(Request $request)
     {
         //Validar datos
         $validator = Validator::make(
@@ -37,7 +37,7 @@ class AthleteController extends Controller
 
         //Save
         $userData = UserData::create([
-            'user_id' => $id,
+            'user_id' => $request->user_id,
             'date_birth' => $request->date_birth,
             'height' => $request->height,
             'body_weight' => $request->body_weight,
@@ -50,13 +50,13 @@ class AthleteController extends Controller
         ]);
 
         $available_days = AvailableDays::create([
-            'monday' => $request->available_days->monday,
-            'tuesday' => $request->available_days->tuesday,
-            'wednesday' => $request->available_days->wednesday,
-            'thursday' => $request->available_days->thursday,
-            'friday' => $request->available_days->friday,
-            'saturday' => $request->available_days->saturday,
-            'sunday' => $request->available_days->sunday,
+            'monday' => $request->available_days["monday"],
+            'tuesday' => $request->available_days["tuesday"],
+            'wednesday' => $request->available_days["wednesday"],
+            'thursday' => $request->available_days["thursday"],
+            'friday' => $request->available_days["friday"],
+            'saturday' => $request->available_days["saturday"],
+            'sunday' => $request->available_days["sunday"],
         ]);
 
         //Asignar días disponible
