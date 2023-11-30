@@ -9,6 +9,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CoachController;
 use App\Http\Controllers\API\ExerciseController;
 use App\Http\Controllers\API\PasswordRecoverController;
+use App\Http\Controllers\API\WorkoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +47,6 @@ Route::post('athlete/user-data', [AthleteController::class, 'storeUserData']);
 //Exercises
 Route::get('exercises/get-all-user/{id}', [ExerciseController::class, 'getAllUserExercises']);
 Route::post('exercises', [ExerciseController::class, 'store']);
+
+//Workout
+Route::post('workout', [WorkoutController::class, 'store']);
