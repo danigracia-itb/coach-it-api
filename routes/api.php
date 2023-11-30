@@ -40,6 +40,7 @@ Route::post('users/password-recover', [PasswordRecoverController::class, 'passwo
 //coach
 Route::get('coach/get-athletes/{id}', [CoachController::class, 'getAthletes']);
 Route::get('coach/get-athlete-profile/{id}', [CoachController::class, 'getAthleteProfile']);
+Route::get('coach/get-athlete-workouts/{id}', [CoachController::class, 'getAthleteWorkouts']);
 
 //athlete
 Route::post('athlete/user-data', [AthleteController::class, 'storeUserData']);
