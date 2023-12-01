@@ -9,6 +9,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CoachController;
 use App\Http\Controllers\API\ExerciseController;
 use App\Http\Controllers\API\PasswordRecoverController;
+use App\Http\Controllers\API\WorkoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::post('users/password-recover', [PasswordRecoverController::class, 'passwo
 //coach
 Route::get('coach/get-athletes/{id}', [CoachController::class, 'getAthletes']);
 Route::get('coach/get-athlete-profile/{id}', [CoachController::class, 'getAthleteProfile']);
+Route::get('coach/get-athlete-workouts/{id}', [CoachController::class, 'getAthleteWorkouts']);
 
 //athlete
 Route::post('athlete/user-data', [AthleteController::class, 'storeUserData']);
@@ -47,3 +49,6 @@ Route::post('athlete/user-data', [AthleteController::class, 'storeUserData']);
 Route::get('exercises/get-all-user/{id}', [ExerciseController::class, 'getAllUserExercises']);
 Route::post('exercises', [ExerciseController::class, 'store']);
 Route::delete('/exercises/{id}', [ExerciseController::class, 'destroy']);
+
+//Workout
+Route::post('workout', [WorkoutController::class, 'store']);
