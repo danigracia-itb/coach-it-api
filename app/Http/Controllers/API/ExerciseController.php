@@ -67,7 +67,18 @@ class ExerciseController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+         // Buscar el modelo por el ID
+         $exercise = Exercise::find($id);
+
+         // Verificar si el modelo existe
+         if (!$exercise) {
+             return response()->json(['message' => 'Exercise not found'], 404);
+         }
+
+         // Eliminar el modelo
+         $exercise->delete();
+
+         return response()->json(['message' => 'Exercise Deleted']);
     }
 
     //Other

@@ -46,3 +46,4 @@ Route::post('athlete/user-data', [AthleteController::class, 'storeUserData']);
 //Exercises
 Route::get('exercises/get-all-user/{id}', [ExerciseController::class, 'getAllUserExercises']);
 Route::post('exercises', [ExerciseController::class, 'store']);
+Route::delete('/exercises/{id}', [ExerciseController::class, 'destroy']);
