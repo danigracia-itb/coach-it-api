@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 //Contollers
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CoachController;
+use App\Http\Controllers\API\ContactController;
 use App\Http\Controllers\API\ExerciseController;
 use App\Http\Controllers\API\PasswordRecoverController;
 use App\Http\Controllers\API\WorkoutController;
@@ -52,3 +53,6 @@ Route::delete('/exercises/{id}', [ExerciseController::class, 'destroy']);
 
 //Workout
 Route::post('workout', [WorkoutController::class, 'store']);
+
+//Contact Us
+Route::post("contact-us", [ContactController::class, "submit"]);
