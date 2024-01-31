@@ -25,11 +25,11 @@ class WorkoutExercise extends Model
 
     public function exercise()
     {
-        return $this->hasOne(Exercise::class, 'exercise_id');
+        return $this->belongsTo(Exercise::class, 'exercise_id');
     }
 
     public function sets()
     {
-        return $this->hasMany(Exercise::class, 'workout_exercise_id');
+        return $this->hasMany(Exercise::class, 'workout_exercise_id', "id");
     }
 }

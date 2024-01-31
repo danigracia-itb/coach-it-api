@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId("workout_exercise_id")->constrained()->onDelete("cascade");
 
-            $table->integer("target_reps");
-            $table->float("target_weight", 4 , 2);
-            $table->float("target_rpe", 2, 1);
+            $table->integer("target_reps")->default(0);
+            $table->float("target_weight", 4 , 2)->default(0);
+            $table->float("target_rpe", 2, 1)->default(0);
 
-            $table->integer("actual_reps")->nullable();
-            $table->float("actual_weight", 4 , 2)->nullable();
-            $table->float("actual_rpe", 2, 1)->nullable();
+            $table->integer("actual_reps")->default(0);
+            $table->float("actual_weight", 4 , 2)->default(0);
+            $table->float("actual_rpe", 2, 1)->default(0);
         });
     }
 

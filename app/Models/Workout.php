@@ -24,4 +24,9 @@ class Workout extends Model
     {
         return $this->hasMany(WorkoutExercise::class, 'workout_id');
     }
+
+    public function workout_exercises()
+    {
+        return $this->hasMany(WorkoutExercise::class, 'workout_id');
+    }
 }

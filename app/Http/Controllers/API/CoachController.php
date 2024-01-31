@@ -25,4 +25,6 @@ class CoachController extends Controller
         $workouts = Workout::where("user_id", $id)->with("exercises")->get();
         return $workouts;
     }
+
+
 }

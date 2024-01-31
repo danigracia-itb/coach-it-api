@@ -110,4 +110,11 @@ class AuthController extends Controller
             ], Response::HTTP_UNAUTHORIZED);
         }
     }
+
+    public function changeName(Request $request, $id) {
+        $user = User::find($id);
+        $user->name = $request->input("name");
+        $user->save();
+        return "success";
+    }
 }

@@ -37,6 +37,7 @@ Route::get('/get-user', [AuthController::class, 'getUser'])->middleware("jwtAuth
 Route::post('users/request-password-recover', [PasswordRecoverController::class, 'requestPasswordRecover']);
 Route::post('users/password-recover', [PasswordRecoverController::class, 'passwordRecover']);
 
+Route::put("users/change-name/{id}", [AuthController::class, "changeName"]);
 
 //coach
 Route::get('coach/get-athletes/{id}', [CoachController::class, 'getAthletes']);
@@ -53,6 +54,9 @@ Route::delete('/exercises/{id}', [ExerciseController::class, 'destroy']);
 
 //Workout
 Route::post('workout', [WorkoutController::class, 'store']);
+Route::get('workout/{id}', [WorkoutController::class, 'show']);
+Route::put('workout/{id}', [WorkoutController::class, 'update']);
+Route::delete('workout/{id}', [WorkoutController::class, 'destroy']);
 
 //Contact Us
 Route::post("contact-us", [ContactController::class, "submit"]);
