@@ -57,6 +57,7 @@ Route::post('workout', [WorkoutController::class, 'store']);
 Route::get('workout/{id}', [WorkoutController::class, 'show']);
 Route::put('workout/{id}', [WorkoutController::class, 'update']);
 Route::delete('workout/{id}', [WorkoutController::class, 'destroy']);
+Route::post('workout/copy/{id}', [WorkoutController::class, 'copy']);
 
 //Contact Us
 Route::post("contact-us", [ContactController::class, "submit"]);

@@ -18,34 +18,16 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             "id" => 111111,
-            "name" => "Coach Test",
-            'email' => "coach@gmail.com",
+            "name" => "Dani Coach",
+            'email' => "danicoach@gmail.com",
             'password' => Hash::make("12345678"),
             "is_coach" => true
         ]);
 
         DB::table('users')->insert([
             "id" => 111112,
-            "name" => "Athlete 1",
-            'email' => "athlete1@gmail.com",
-            'password' => Hash::make("12345678"),
-            "is_coach" => false,
-            "coach_id" => 111111
-        ]);
-
-        DB::table('users')->insert([
-            "id" => random_int(100000, 999999),
-            "name" => "Athlete 2",
-            'email' => "athlete2@gmail.com",
-            'password' => Hash::make("12345678"),
-            "is_coach" => false,
-            "coach_id" => 111111
-        ]);
-
-        DB::table('users')->insert([
-            "id" => random_int(100000, 999999),
-            "name" => "Athlete 3",
-            'email' => "athlete3@gmail.com",
+            "name" => "Jose Antonio",
+            'email' => "joseantonio@gmail.com",
             'password' => Hash::make("12345678"),
             "is_coach" => false,
             "coach_id" => 111111
@@ -56,13 +38,13 @@ class UserSeeder extends Seeder
             'user_id' => 111112,
             'date_birth' => '1990-01-01',
             'height' => 180,
-            'body_weight' => 70.5,
+            'body_weight' => 74.5,
             'time_training' => '1 - 2 years',
             'train_available_time' => '2:30',
-            'wishlist_exercises' => 'Ejercicio 1, Ejercicio 2',
-            'banlist_exercises' => 'Ejercicio 3, Ejercicio 4',
-            'short_term_goals' => 'Meta a corto plazo 1',
-            'long_term_goals' => 'Meta a largo plazo 1',
+            'wishlist_exercises' => 'Pull Ups, Bench Press',
+            'banlist_exercises' => 'Deadlift, Leg Curls',
+            'short_term_goals' => 'Enjoy training',
+            'long_term_goals' => 'Build a great physic',
         ]);
 
         // Crear días disponibles de ejemplo

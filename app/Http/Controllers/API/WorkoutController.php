@@ -126,4 +126,51 @@ class WorkoutController extends Controller
         $workout->delete();
         return "success";
     }
+
+    public function copy(Request $request, string $id)
+    {
+        // Obtener el entrenamiento original
+        $originalWorkout = Workout::findOrFail($id);
+        $originalWorkoutSets = [];
+        $originalWorkoutExercises =  DB::table("workouts")
+            ->where("workouts.id", "=",  $id)
+            ->join("workout_exercises", "workouts.id", "=", "workout_exercises.workout_id")
+            ->join("exercises", "workout_exercises.exercise_id", "=", "exercises.id")
+            ->orderBy("workout_exercises.order")
+            ->select(["workouts.date", "workout_exercises.*", "exercises.*", "workout_exercises.id"])->get();
+
+        // Crear un nuevo entrenamiento con la misma fecha
+        $newWorkout = Workout::create([
+            'user_id' => $originalWorkout->user_id,
+            'date' => $request->input("date") // Fecha especificada en la solicitud
+        ]);
+
+
+        foreach ($originalWorkoutExercises as $exercise) {
+
+            $sets = DB::table("sets")->where("sets.workout_exercise_id", "=", $exercise->id)->select("*")->get();
+
+            $workoutExercise = WorkoutExercise::create([
+                'order' => $exercise->order,
+                'workout_id' => $newWorkout->id,
+                'exercise_id' => $exercise->exercise_id
+            ]);
+
+            //Guardar series
+            foreach ($sets as $set) {
+                Set::create([
+                    'workout_exercise_id' => $workoutExercise->id,
+                    'actual_weight' => $set->actual_weight,
+                    'actual_reps' => $set->actual_reps,
+                    'actual_rpe' => $set->actual_rpe,
+                    'target_weight' => $set->target_weight,
+                    'target_reps' => $set->target_reps,
+                    'target_rpe' => $set->target_rpe
+                ]);
+            }
+        };
+
+        // Devolver el nuevo entrenamiento creado con todas sus relaciones
+        return "success";
+    }
 }
