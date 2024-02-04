@@ -111,6 +111,13 @@ class AuthController extends Controller
         }
     }
 
+
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return $user;
+    }
+
     public function changeName(Request $request, $id) {
         $user = User::find($id);
         $user->name = $request->input("name");

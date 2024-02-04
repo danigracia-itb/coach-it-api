@@ -10,7 +10,10 @@ use App\Http\Controllers\API\CoachController;
 use App\Http\Controllers\API\ContactController;
 use App\Http\Controllers\API\ExerciseController;
 use App\Http\Controllers\API\PasswordRecoverController;
+use App\Http\Controllers\API\RestDayController;
+use App\Http\Controllers\API\StatsController;
 use App\Http\Controllers\API\WorkoutController;
+use App\Models\RestDay;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,15 +37,16 @@ Route::get('/logout', [AuthController::class, 'logout'])->middleware("jwtAuth");
 Route::post('/refresh', [AuthController::class, 'refresh'])->middleware("jwtAuth");
 Route::get('/get-user', [AuthController::class, 'getUser'])->middleware("jwtAuth");
 
+
 Route::post('users/request-password-recover', [PasswordRecoverController::class, 'requestPasswordRecover']);
 Route::post('users/password-recover', [PasswordRecoverController::class, 'passwordRecover']);
-
+Route::get('users/{id}', [AuthController::class, 'show']);
 Route::put("users/change-name/{id}", [AuthController::class, "changeName"]);
 
 //coach
 Route::get('coach/get-athletes/{id}', [CoachController::class, 'getAthletes']);
 Route::get('coach/get-athlete-profile/{id}', [CoachController::class, 'getAthleteProfile']);
-Route::get('coach/get-athlete-workouts/{id}', [CoachController::class, 'getAthleteWorkouts']);
+Route::get('coach/get-athlete-calendar/{id}', [CoachController::class, 'getAthleteCalendar']);
 
 //athlete
 Route::post('athlete/user-data', [AthleteController::class, 'storeUserData']);
@@ -61,3 +65,11 @@ Route::post('workout/copy/{id}', [WorkoutController::class, 'copy']);
 
 //Contact Us
 Route::post("contact-us", [ContactController::class, "submit"]);
+
+//STATS
+Route::get("stats/days-trained-last-month/{id}", [StatsController::class, "daysTrainedLastMonth"]);
+Route::get("stats/days-trained-this-month/{id}", [StatsController::class, "daysTrainedThisMonth"]);
+Route::get("stats/sets-done-this-month/{id}", [StatsController::class, "setsDoneThisMonth"]);
+
+//Rest day
+Route::post('rest-day', [RestDayController::class, 'store']);

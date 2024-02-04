@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\UserData;
 use App\Models\AvailableDays;
+use App\Models\RestDay;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -56,6 +57,16 @@ class UserSeeder extends Seeder
             'friday' => true,
             'saturday' => false,
             'sunday' => true,
+        ]);
+
+        RestDay::create([
+            "date" => "2024-02-05",
+            "user_id" => 111112
+        ]);
+
+        RestDay::create([
+            "date" => "2024-02-06",
+            "user_id" => 111112
         ]);
 
         // Asignar días disponibles de ejemplo al usuario

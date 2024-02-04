@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Exercise;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\RestDay;
 use App\Models\Workout;
 
 class CoachController extends Controller
@@ -20,10 +21,17 @@ class CoachController extends Controller
         return $athlete;
     }
 
-    public function getAthleteWorkouts($id) {
-        //TODO: OBTENER SETS Y EJERCICIO
+    public function getAthleteCalendar($id) {
+        //workouts
         $workouts = Workout::where("user_id", $id)->with("exercises")->get();
-        return $workouts;
+
+        //rest days
+        $restDays = RestDay::where("user_id", $id)->get();
+
+        return [
+            "workouts" => $workouts,
+            "restDays" => $restDays
+        ];
     }
 
 
