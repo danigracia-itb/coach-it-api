@@ -20,4 +20,10 @@ class RestDayController extends Controller
         // Retornar el ejercicio creado
         return $restDay;
     }
+
+    public function availableDay(Request $request) {
+        $restDay = RestDay::where("date", $request->input("date"))->where('user_id', $request->input("user_id"))->first();
+        $restDay->delete();
+        return "success";
+    }
 }

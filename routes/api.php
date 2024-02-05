@@ -73,3 +73,4 @@ Route::get("stats/sets-done-this-month/{id}", [StatsController::class, "setsDone
 
 //Rest day
 Route::post('rest-day', [RestDayController::class, 'store']);
+Route::post('available-day', [RestDayController::class, 'availableDay']);
