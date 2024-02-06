@@ -53,6 +53,7 @@ Route::get('coach/get-athletes-with-last-payments/{id}', [PaymentController::cla
 
 //athlete
 Route::post('athlete/user-data', [AthleteController::class, 'storeUserData']);
+Route::delete('athlete/{id}', [AthleteController::class, 'destroy']);
 
 //Exercises
 Route::get('exercises/get-all-user/{id}', [ExerciseController::class, 'getAllUserExercises']);

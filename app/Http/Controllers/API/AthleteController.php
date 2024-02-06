@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\User;
 use App\Models\UserData;
 use Illuminate\Http\Request;
 use App\Models\AvailableDays;
@@ -67,5 +68,13 @@ class AthleteController extends Controller
         return response()->json([
             'success' => true,
         ]);
+    }
+
+    public function destroy($id) {
+        $data = UserData::where("user_id", $id)->first();
+        $data->delete();
+        $athlete = User::findOrFail($id);
+        $athlete->delete();
+        return "success";
     }
 }
