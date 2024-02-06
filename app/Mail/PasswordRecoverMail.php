@@ -30,7 +30,7 @@ class PasswordRecoverMail extends Mailable
     public function build()
     {
         return $this->view('mails.recoverPassword')
-            ->subject("Recuperación de Contraseña")
+            ->subject("Password recover")
             ->with([
                 'token' => $this->token,
                 'name' => $this->name,

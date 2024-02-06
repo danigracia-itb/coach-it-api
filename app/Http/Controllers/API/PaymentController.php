@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\PaymentReminderMail;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -34,5 +36,11 @@ class PaymentController extends Controller
         ]);
         $payment->save();
         return $payment;
+    }
+
+    public function reminder(Request $request) {
+        Mail::to($request->input("athlete_email"))->send(new PaymentReminderMail($request->input("athlete_name"), $request->input("coach"), $request->input("date"), $request->input("quantity")));
+
+        return "success";
     }
 }

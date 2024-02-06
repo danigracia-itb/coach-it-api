@@ -6,11 +6,11 @@
     <title>Contact Form Email</title>
 </head>
 <body>
-    <p>Has recibido un nuevo mensaje de contacto:</p>
+    <p>New contact form message:</p>
     <ul>
-        <li><strong>Correo electrónico:</strong> {{ $data['email'] }}</li>
+        <li><strong>Email:</strong> {{ $data['email'] }}</li>
         <li><strong>Subject:</strong> {{ $data['subject'] }}</li>
-        <li><strong>Mensaje:</strong> {{ $data['message'] }}</li>
+        <li><strong>Message:</strong> {{ $data['message'] }}</li>
     </ul>
 </body>
 </html>

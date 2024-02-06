@@ -81,3 +81,4 @@ Route::post('available-day', [RestDayController::class, 'availableDay']);
 
 //payment
 Route::post('payments', [PaymentController::class, 'store']);
+Route::post("send-payment-reminder", [PaymentController::class, 'reminder']);
