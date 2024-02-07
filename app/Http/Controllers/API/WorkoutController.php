@@ -24,7 +24,33 @@ class WorkoutController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO: VALIDAR
+       // $workout = Workout::create([
+        //     'user_id' => $request->user_id,
+        //     'date' => $request->date
+        // ]);
+
+        // $count = 1;
+        // foreach ($request->workout as $exercise) {
+        //     $workoutExercise = WorkoutExercise::create([
+        //         'order' => $count,
+        //         'workout_id' => $workout->id,
+        //         'exercise_id' => $exercise["id"]
+        //     ]);
+
+        //     //Guardar series
+        //     foreach ($exercise["sets"] as $set) {
+        //         Set::create([
+        //             'workout_exercise_id' => $workoutExercise->id,
+        //             'target_weight' => $set["weight"],
+        //             'target_reps' => $set["reps"],
+        //             'target_rpe' => $set["rpe"]
+        //         ]);
+        //     }
+
+        //     $count++;
+        // };
+
+        // return $workout;
 
         $workout = Workout::create([
             'user_id' => $request->user_id,
@@ -36,21 +62,24 @@ class WorkoutController extends Controller
             $workoutExercise = WorkoutExercise::create([
                 'order' => $count,
                 'workout_id' => $workout->id,
-                'exercise_id' => $exercise["id"]
+                'exercise_id' => $exercise["exercise_id"]
             ]);
 
-            //Guardar series
+            // Guardar series
             foreach ($exercise["sets"] as $set) {
                 Set::create([
                     'workout_exercise_id' => $workoutExercise->id,
-                    'target_weight' => $set["weight"],
-                    'target_reps' => $set["reps"],
-                    'target_rpe' => $set["rpe"]
+                    'actual_weight' => $set["actual_weight"] ?? 0,
+                    'actual_reps' => $set["actual_reps"] ?? 0,
+                    'actual_rpe' => $set["actual_rpe"] ?? 0,
+                    'target_weight' => $set["target_weight"] ?? 0,
+                    'target_reps' => $set["target_reps"] ?? 0,
+                    'target_rpe' => $set["target_rpe"] ?? 0,
                 ]);
             }
 
             $count++;
-        };
+        }
 
         return $workout;
     }
