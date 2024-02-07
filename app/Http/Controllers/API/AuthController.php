@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Intervention\Image\Image;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -41,11 +42,11 @@ class AuthController extends Controller
             "password" => bcrypt($request->password)
         ]);
 
-        if($request->is_coach == true) {
+        if ($request->is_coach == true) {
             $user->is_coach = true;
         }
 
-        if($request->coach_id && $request->is_coach == false){
+        if ($request->coach_id && $request->is_coach == false) {
             $user->coach_id = $request->coach_id;
         }
 
@@ -118,10 +119,37 @@ class AuthController extends Controller
         return $user;
     }
 
-    public function changeName(Request $request, $id) {
+    public function changeName(Request $request, $id)
+    {
         $user = User::find($id);
         $user->name = $request->input("name");
         $user->save();
         return "success";
+    }
+
+    public function changePicture(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'msg' => 'Not Found',
+            ], 404);
+        }
+
+        $image = $request->image;
+
+        // Genera un nombre único para la imagen
+        $imageName = time() . '_' . $image->getClientOriginalName();
+
+        // Guarda la imagen en la carpeta de almacenamiento de imágenes
+        $image->storeAs('public/images', $imageName);
+
+        // Asigna la ruta de la imagen al campo 'picture' del usuario
+        $user->picture = 'storage/images/' . $imageName;
+        $user->save();
+
+        return response()->json($user, 201);
     }
 }

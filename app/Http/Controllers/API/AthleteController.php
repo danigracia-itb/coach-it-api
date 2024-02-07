@@ -70,9 +70,15 @@ class AthleteController extends Controller
         ]);
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $data = UserData::where("user_id", $id)->first();
-        $data->delete();
+
+        if ($data) {
+            $data->delete();
+        }
+
+
         $athlete = User::findOrFail($id);
         $athlete->delete();
         return "success";

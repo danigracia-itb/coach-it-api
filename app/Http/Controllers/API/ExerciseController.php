@@ -43,7 +43,7 @@ class ExerciseController extends Controller
         ]);
 
         // Retornar el ejercicio creado
-        return response()->json(['exercise' => $exercise], 201);
+        return $exercise;
     }
 
     /**

@@ -13,7 +13,7 @@ class CoachController extends Controller
 {
     public function getAthletes($id)
     {
-        $athletes = User::where("coach_id", $id)->get();
+        $athletes = User::where("coach_id", $id)->with("payments")->get();
         return $athletes;
     }
     public function getAthleteProfile($id) {

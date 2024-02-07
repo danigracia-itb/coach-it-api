@@ -38,18 +38,16 @@ Route::get('/logout', [AuthController::class, 'logout'])->middleware("jwtAuth");
 Route::post('/refresh', [AuthController::class, 'refresh'])->middleware("jwtAuth");
 Route::get('/get-user', [AuthController::class, 'getUser'])->middleware("jwtAuth");
 
-
 Route::post('users/request-password-recover', [PasswordRecoverController::class, 'requestPasswordRecover']);
 Route::post('users/password-recover', [PasswordRecoverController::class, 'passwordRecover']);
 Route::get('users/{id}', [AuthController::class, 'show']);
 Route::put("users/change-name/{id}", [AuthController::class, "changeName"]);
+Route::post("users/change-picture/{id}", [AuthController::class, "changePicture"]);
 
 //coach
 Route::get('coach/get-athletes/{id}', [CoachController::class, 'getAthletes']);
 Route::get('coach/get-athlete-profile/{id}', [CoachController::class, 'getAthleteProfile']);
 Route::get('coach/get-athlete-calendar/{id}', [CoachController::class, 'getAthleteCalendar']);
-Route::get('coach/get-athlete-with-payments/{id}', [PaymentController::class, 'getAthleteWithPayments']);
-Route::get('coach/get-athletes-with-last-payments/{id}', [PaymentController::class, 'getAthletesWithLastPayments']);
 
 //athlete
 Route::post('athlete/user-data', [AthleteController::class, 'storeUserData']);
@@ -78,7 +76,6 @@ Route::get("stats/sets-done-this-month/{id}", [StatsController::class, "setsDone
 //Rest day
 Route::post('rest-day', [RestDayController::class, 'store']);
 Route::post('available-day', [RestDayController::class, 'availableDay']);
-
 
 //payment
 Route::post('payments', [PaymentController::class, 'store']);
