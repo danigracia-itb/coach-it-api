@@ -17,16 +17,18 @@ class PaymentReminderMail extends Mailable
     public $coach;
     public $date;
     public $quantity;
+    public $payment_type;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($athlete, $coach, $date, $quantity)
+    public function __construct($athlete, $coach, $date, $quantity, $payment_type)
     {
         $this->athlete = $athlete;
         $this->coach = $coach;
         $this->date = $date;
         $this->quantity = $quantity;
+        $this->payment_type = $payment_type;
     }
 
 
@@ -42,6 +44,7 @@ class PaymentReminderMail extends Mailable
                 "coach" => $this->coach,
                 "date" => $this->date,
                 "quantity" => $this->quantity,
+                "payment_type" => $this->payment_type,
             ]);
     }
 }

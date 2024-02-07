@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->date("date")->default(today());
+
             $table->unsignedBigInteger("athlete_id");
             $table->foreign('athlete_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger("coach_id");
             $table->foreign('coach_id')->references('id')->on('users')->onDelete('cascade');
             $table->float("quantity");
+
+            $table->enum('payment_type', ['monthly', 'quarterly', 'annual'])->default("monthly")->nullable();
         });
     }
 

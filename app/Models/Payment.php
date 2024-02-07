@@ -14,7 +14,8 @@ class Payment extends Model
         'date',
         "athlete_id",
         "coach_id",
-        "quantity"
+        "quantity",
+        "payment_type"
     ];
 
     public $timestamps = false;
