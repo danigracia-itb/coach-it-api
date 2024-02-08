@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\User;
+use App\Models\RestDay;
+use App\Models\Workout;
 use App\Models\UserData;
 use Illuminate\Http\Request;
 use App\Models\AvailableDays;
 use App\Http\Controllers\Controller;
+use App\Models\BodyWeight;
 use Illuminate\Support\Facades\Validator;
 
 class AthleteController extends Controller
@@ -68,6 +71,33 @@ class AthleteController extends Controller
         return response()->json([
             'success' => true,
         ]);
+    }
+
+    public function getAthletes($id)
+    {
+        $athletes = User::where("coach_id", $id)->with("payments")->get();
+        return $athletes;
+    }
+    public function getAthleteProfile($id) {
+        $athlete = User::where("id", $id)->with("userData.availableDays")->first();
+        return $athlete;
+    }
+
+    public function getAthleteCalendar($id) {
+        //workouts
+        $workouts = Workout::where("user_id", $id)->with("exercises")->get();
+
+        //rest days
+        $restDays = RestDay::where("user_id", $id)->get();
+
+        //BODY WEIGHTS
+        $bodyWeights = BodyWeight::where("user_id", $id)->get();
+
+        return [
+            "workouts" => $workouts,
+            "restDays" => $restDays,
+            "bodyWeights" => $bodyWeights
+        ];
     }
 
     public function destroy($id)

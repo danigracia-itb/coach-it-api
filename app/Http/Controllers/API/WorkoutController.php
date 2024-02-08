@@ -24,34 +24,6 @@ class WorkoutController extends Controller
      */
     public function store(Request $request)
     {
-       // $workout = Workout::create([
-        //     'user_id' => $request->user_id,
-        //     'date' => $request->date
-        // ]);
-
-        // $count = 1;
-        // foreach ($request->workout as $exercise) {
-        //     $workoutExercise = WorkoutExercise::create([
-        //         'order' => $count,
-        //         'workout_id' => $workout->id,
-        //         'exercise_id' => $exercise["id"]
-        //     ]);
-
-        //     //Guardar series
-        //     foreach ($exercise["sets"] as $set) {
-        //         Set::create([
-        //             'workout_exercise_id' => $workoutExercise->id,
-        //             'target_weight' => $set["weight"],
-        //             'target_reps' => $set["reps"],
-        //             'target_rpe' => $set["rpe"]
-        //         ]);
-        //     }
-
-        //     $count++;
-        // };
-
-        // return $workout;
-
         $workout = Workout::create([
             'user_id' => $request->user_id,
             'date' => $request->date
@@ -60,7 +32,8 @@ class WorkoutController extends Controller
         $count = 1;
         foreach ($request->workout as $exercise) {
             $workoutExercise = WorkoutExercise::create([
-                'order' => $count,
+                'order' => $exercise["order"],
+                'notes' => $exercise["notes"],
                 'workout_id' => $workout->id,
                 'exercise_id' => $exercise["exercise_id"]
             ]);
@@ -122,7 +95,8 @@ class WorkoutController extends Controller
         $count = 1;
         foreach ($request->workout as $exercise) {
             $workoutExercise = WorkoutExercise::create([
-                'order' => $count,
+                'order' => $exercise["order"],
+                'notes' => $exercise["notes"],
                 'workout_id' => $workout->id,
                 'exercise_id' => $exercise["exercise_id"]
             ]);

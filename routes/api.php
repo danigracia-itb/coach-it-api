@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 //Contollers
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\BodyWeightController;
 use App\Http\Controllers\API\CoachController;
 use App\Http\Controllers\API\ContactController;
 use App\Http\Controllers\API\ExerciseController;
@@ -44,12 +45,11 @@ Route::get('users/{id}', [AuthController::class, 'show']);
 Route::put("users/change-name/{id}", [AuthController::class, "changeName"]);
 Route::post("users/change-picture/{id}", [AuthController::class, "changePicture"]);
 
-//coach
-Route::get('coach/get-athletes/{id}', [CoachController::class, 'getAthletes']);
-Route::get('coach/get-athlete-profile/{id}', [CoachController::class, 'getAthleteProfile']);
-Route::get('coach/get-athlete-calendar/{id}', [CoachController::class, 'getAthleteCalendar']);
-
 //athlete
+Route::get('coach/get-athletes/{id}', [AthleteController::class, 'getAthletes']);
+Route::get('coach/get-athlete-profile/{id}', [AthleteController::class, 'getAthleteProfile']);
+Route::get('coach/get-athlete-calendar/{id}', [AthleteController::class, 'getAthleteCalendar']);
+
 Route::post('athlete/user-data', [AthleteController::class, 'storeUserData']);
 Route::delete('athlete/{id}', [AthleteController::class, 'destroy']);
 
@@ -80,3 +80,9 @@ Route::post('available-day', [RestDayController::class, 'availableDay']);
 //payment
 Route::post('payments', [PaymentController::class, 'store']);
 Route::post("send-payment-reminder", [PaymentController::class, 'reminder']);
+
+
+//BW
+Route::post("/body-weights", [BodyWeightController::class, 'store']);
+Route::put("/body-weights/{id}", [BodyWeightController::class, 'update']);
+Route::get("/body-weights/{id}", [BodyWeightController::class, 'show']);

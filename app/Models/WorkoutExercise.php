@@ -12,6 +12,7 @@ class WorkoutExercise extends Model
     protected $table = 'workout_exercises';
     protected $fillable = [
         'order',
+        'notes',
         'workout_id',
         'exercise_id'
     ];
