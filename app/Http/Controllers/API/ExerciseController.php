@@ -85,7 +85,10 @@ class ExerciseController extends Controller
     //Gets all exercises defaults + created (recives coach id)
     public function getAllUserExercises($id)
     {
-        $exercises = Exercise::all();
+        $exercises = Exercise::where(function ($query) use ($id) {
+            $query->where('user_id', '=', $id)
+                  ->orWhere('is_default', '=', true);
+        })->get();
         return $exercises;
     }
 }
