@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedInteger('id')->primary()->unique()->length(6);
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('picture')->default("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png");
+            $table->string('picture')->default("storage/images/default.webp");
             $table->string('password');
             $table->boolean("is_coach")->default(false);
 
