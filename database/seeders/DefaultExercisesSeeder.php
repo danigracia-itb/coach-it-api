@@ -52,7 +52,7 @@ class DefaultExercisesSeeder extends Seeder
             ],
             [
                 "name" => "Tricep Dip",
-                "muscular_group" => 2
+                "muscular_group" => 1
             ],
             [
                 "name" => "Chest Fly",
@@ -80,7 +80,7 @@ class DefaultExercisesSeeder extends Seeder
             ],
             [
                 "name" => "Skull Crushers",
-                "muscular_group" => 2
+                "muscular_group" => 1
             ],
             [
                 "name" => "Incline Bench Press",
@@ -92,7 +92,7 @@ class DefaultExercisesSeeder extends Seeder
             ],
             [
                 "name" => "Leg Raise",
-                "muscular_group" => 3
+                "muscular_group" => 4
             ],
             [
                 "name" => "Preacher Curl",
@@ -108,7 +108,7 @@ class DefaultExercisesSeeder extends Seeder
             ],
             [
                 "name" => "Tricep Kickbacks",
-                "muscular_group" => 2
+                "muscular_group" => 1
             ],
             [
                 "name" => "Pulldown",
