@@ -41,9 +41,13 @@ Route::get('/get-user', [AuthController::class, 'getUser'])->middleware("jwtAuth
 
 Route::post('users/request-password-recover', [PasswordRecoverController::class, 'requestPasswordRecover']);
 Route::post('users/password-recover', [PasswordRecoverController::class, 'passwordRecover']);
+
 Route::get('users/{id}', [AuthController::class, 'show']);
+
 Route::put("users/change-name/{id}", [AuthController::class, "changeName"]);
 Route::post("users/change-picture/{id}", [AuthController::class, "changePicture"]);
+Route::put("users/change-data/{id}", [AuthController::class, "changeData"]);
+Route::put("users/change-coach/{id}", [AuthController::class, "changeCoach"]);
 
 //athlete
 Route::get('coach/get-athletes/{id}', [AthleteController::class, 'getAthletes']);
