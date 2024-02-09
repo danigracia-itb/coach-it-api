@@ -24,7 +24,6 @@ class AthleteController extends Controller
                 'user_id' => "required",
                 'date_birth' => "required",
                 'height' => "required",
-                'body_weight' => "required",
                 'time_training' => "required",
                 'train_available_time' => "required",
                 'wishlist_exercises' => "required",
@@ -39,12 +38,18 @@ class AthleteController extends Controller
             return response()->json(['error' => $validator->errors()], 401);
         }
 
+        $userData = UserData::where("user_id", $request->input("user_id"))->first();
+
+        if($userData) {
+            $userData->availableDays->delete();
+            $userData->delete();
+        }
+
         //Save
         $userData = UserData::create([
             'user_id' => $request->user_id,
             'date_birth' => $request->date_birth,
             'height' => $request->height,
-            'body_weight' => $request->body_weight,
             'time_training' => $request->time_training,
             'train_available_time' => $request->train_available_time,
             'wishlist_exercises' => $request->wishlist_exercises,

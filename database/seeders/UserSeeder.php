@@ -39,7 +39,6 @@ class UserSeeder extends Seeder
             'user_id' => 111112,
             'date_birth' => '1990-01-01',
             'height' => 180,
-            'body_weight' => 74.5,
             'time_training' => '1 - 2 years',
             'train_available_time' => '2:30',
             'wishlist_exercises' => 'Pull Ups, Bench Press',

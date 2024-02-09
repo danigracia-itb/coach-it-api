@@ -19,7 +19,6 @@ return new class extends Migration
             //P1
             $table->date("date_birth");
             $table->integer("height"); //cm
-            $table->float("body_weight", 5, 2);
 
             //P2
             $table->enum('time_training', ['0 - 6 months', '6 months - 1 year', '1 - 2 years', '+2 years']);
