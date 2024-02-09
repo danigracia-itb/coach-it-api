@@ -55,7 +55,7 @@ Route::get('coach/get-athlete-profile/{id}', [AthleteController::class, 'getAthl
 Route::get('coach/get-athlete-calendar/{id}', [AthleteController::class, 'getAthleteCalendar']);
 
 Route::post('athlete/user-data', [AthleteController::class, 'storeUserData']);
-Route::delete('athlete/{id}', [AthleteController::class, 'destroy']);
+Route::delete('athlete/no-coach/{id}', [AthleteController::class, 'noCoach']);
 
 //Exercises
 Route::get('exercises/get-all-user/{id}', [ExerciseController::class, 'getAllUserExercises']);

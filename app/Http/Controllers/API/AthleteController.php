@@ -100,17 +100,11 @@ class AthleteController extends Controller
         ];
     }
 
-    public function destroy($id)
+    public function noCoach($id)
     {
-        $data = UserData::where("user_id", $id)->first();
-
-        if ($data) {
-            $data->delete();
-        }
-
-
         $athlete = User::findOrFail($id);
-        $athlete->delete();
-        return "success";
+        $athlete->coach_id = null;
+        $athlete->save();
+        return $athlete;
     }
 }

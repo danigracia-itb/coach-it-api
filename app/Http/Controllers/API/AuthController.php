@@ -164,20 +164,27 @@ class AuthController extends Controller
 
     public function changeCoach(Request $request, $id)
     {
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'coach_id' => 'required|exists:users,id',
-            ]
-        );
+        $user = User::findOrFail($id);
 
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
+        if($request->input("coach_id") != "nocoach") {
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'coach_id' => 'required|exists:users,id',
+                ]
+            );
+
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()], 401);
+            }
+
+            $user->coach_id = $request->input("coach_id");
+        } else {
+            $user->coach_id = null;
         }
 
-        $user = User::findOrFail($id);
-        $user->coach_id = $request->input("coach_id");
         $user->save();
-        return "success";
+
+        return $user;
     }
 }
