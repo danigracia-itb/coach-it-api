@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Trac;
 use App\Models\User;
 use App\Models\RestDay;
 use App\Models\Workout;
 use App\Models\UserData;
+use App\Models\BodyWeight;
 use Illuminate\Http\Request;
 use App\Models\AvailableDays;
 use App\Http\Controllers\Controller;
-use App\Models\BodyWeight;
 use Illuminate\Support\Facades\Validator;
 
 class AthleteController extends Controller
@@ -98,10 +99,14 @@ class AthleteController extends Controller
         //BODY WEIGHTS
         $bodyWeights = BodyWeight::where("user_id", $id)->get();
 
+        //Tracs
+        $tracs = Trac::where("user_id", $id)->get();
+
         return [
             "workouts" => $workouts,
             "restDays" => $restDays,
-            "bodyWeights" => $bodyWeights
+            "bodyWeights" => $bodyWeights,
+            "tracs" => $tracs
         ];
     }
 

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class RestDayController extends Controller
 {
-    public function store(Request $request)
+    public function restDay(Request $request)
     {
 
         // Crear el ejercicio
